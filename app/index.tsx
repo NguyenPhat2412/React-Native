@@ -1,65 +1,32 @@
-import { useState } from "react";
-import { Button, Text, TextInput, View } from "react-native";
+import Footer from "@/components/app.footer";
+import Header from "@/components/app.header";
+import Home from "@/components/app.home";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+import { View } from "react-native";
 
-export default function Index() {
-  const [number, setNumber] = useState<number>(0);
-  const [name, setName] = useState<string>("");
-  const [age, setAge] = useState<string>("");
+SplashScreen.preventAutoHideAsync();
 
-  const increment = () => {
-    setNumber((prev) => prev + 1);
-  };
+const AppTodo = () => {
+  const [loaded, error] = useFonts({
+    "OpenSans-Regular": require("../assets/fonts/Open_Sans/OpenSans-Regular.ttf"),
+  });
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+  if (!loaded && !error) {
+    return null;
+  }
 
-  const decrement = () => {
-    setNumber((prev) => prev - 1);
-  };
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <View>
-        <Text>Set Text: {name}</Text>
-        <TextInput
-          value={name}
-          onChangeText={setName}
-          placeholder="Enter text"
-          style={{
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1,
-            width: "80%",
-            marginBottom: 20,
-            paddingHorizontal: 10,
-          }}
-          multiline
-        />
-      </View>
-      <View>
-        <Text>Set Age: {age}</Text>
-        <TextInput
-          value={age}
-          onChangeText={setAge}
-          placeholder="Enter text"
-          keyboardType="numeric"
-          style={{
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1,
-            width: "80%",
-            marginBottom: 20,
-            paddingHorizontal: 10,
-          }}
-          multiline
-        />
-      </View>
-
-      <Text>{number}</Text>
-      <Button title="Increment" onPress={increment} />
-      <Button title="Decrement" onPress={decrement} />
+    <View>
+      <Header />
+      <Home />
+      <Footer />
     </View>
   );
-}
+};
+export default AppTodo;
