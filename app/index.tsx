@@ -2,15 +2,31 @@ import { globalStyles } from "@/utils/const";
 import { useFonts } from "expo-font";
 import { useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
-import { Button, SafeAreaView, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Button, FlatList, SafeAreaView, Text, View } from "react-native";
 import Footer from "./components/app.footer";
 import Header from "./components/app.header";
 
 SplashScreen.preventAutoHideAsync();
-
+interface DataItem {
+  id: number;
+  title: string;
+  description: string;
+}
 const App = () => {
   const router = useRouter();
+  const [data, setData] = useState<DataItem[]>([
+    {
+      id: 1,
+      title: "Item 1",
+      description: "Description for item 1",
+    },
+    {
+      id: 2,
+      title: "Item 2",
+      description: "Description for item 2",
+    },
+  ]);
   const [loaded, error] = useFonts({
     "OpenSans-Regular": require("../assets/fonts/Open_Sans/OpenSans-Regular.ttf"),
   });
@@ -41,6 +57,28 @@ const App = () => {
             })
           }
         />
+
+        {/* Danh sách data */}
+        <View>
+          <FlatList
+            data={data}
+            renderItem={({ item }) => (
+              <Button
+                title={item.title}
+                onPress={() =>
+                  router.push({
+                    pathname: "/components/app.details",
+                    params: {
+                      id: item.id,
+                      title: item.title,
+                      description: item.description,
+                    },
+                  })
+                }
+              />
+            )}
+          />
+        </View>
         <Footer />
       </View>
     </SafeAreaView>

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 });
 
 export default function Details() {
-  const { id } = useLocalSearchParams();
+  const { id, title, description } = useLocalSearchParams();
   return (
     <View style={{ padding: 16 }}>
       <Text>Đây là Details</Text>
@@ -20,6 +20,11 @@ export default function Details() {
         title="Nhấn vào đây"
         onPress={() => Alert.alert(`Bạn đã nhấn nút! ID: ${id}`)}
       />
+      <View>
+        <Text>ID: {id}</Text>
+        <Text>Title: {title}</Text>
+        <Text>Description: {description}</Text>
+      </View>
     </View>
   );
 }
