@@ -1,5 +1,5 @@
 import { globalStyles } from "@/utils/const";
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { Alert, Button, StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
@@ -24,6 +24,7 @@ export default function Details() {
         <Text>ID: {id}</Text>
         <Text>Title: {title}</Text>
         <Text>Description: {description}</Text>
+        <Link href="/">Back to home link</Link>
       </View>
     </View>
   );

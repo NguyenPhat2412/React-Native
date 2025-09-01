@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Button, FlatList, SafeAreaView, Text, View } from "react-native";
 import Footer from "./components/app.footer";
 import Header from "./components/app.header";
-
+import "./global.css";
 SplashScreen.preventAutoHideAsync();
 interface DataItem {
   id: number;
@@ -40,8 +40,8 @@ const App = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ padding: 16 }}>
+    <SafeAreaView>
+      <View className="flex p-5 justify-center items-center bg-dark">
         <Header />
         <Text style={globalStyles.globalFont}>Đây là Home</Text>
         <Button
